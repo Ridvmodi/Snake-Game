@@ -85,6 +85,10 @@ public:
             if(kbhit())
             {
                     choice=_getch();
+                    if(choice == ' ')
+                    {
+                        system("pause");
+                    }
                 if((prev_choice == 'w' && choice == 's') || (prev_choice == 's' && choice == 'w') || (prev_choice == 'a' && choice == 'd') || (prev_choice=='d' && choice=='a'))
                 {
                     choice=prev_choice;
@@ -111,6 +115,11 @@ public:
                     Border.Board[x][y] = Border.Board[x+1][y];
                     y++;
                 }
+                else if(Border.Board[x][y+1]== '*')
+                {
+                    cout<<"GAME OVER"<<endl;
+                    exit(0);
+                }
                 if(x == 0 || x==31 || y==51 || y==0)
                 {
                     cout<<"GAME OVER"<<endl;
@@ -118,7 +127,6 @@ public:
                 }
                 if(F.x == x && F.y == y)
                 {
-                    cout<<"in food"<<endl;
                     Body.insert(Body.begin(),'*');
                     Border.Board[x][y+1] = 'H';
                     Border.Board[x][y] = '*';
@@ -129,7 +137,7 @@ public:
                 else
                 {
                     Border.print();
-                    Sleep(100);
+                    Sleep(10);
                     system("CLS");
                 }
                 break;
@@ -152,6 +160,11 @@ public:
                     Border.Board[x][y] = Border.Board[x+1][y];
                     y--;
                 }
+                else if(Border.Board[x][y-1]== '*')
+                {
+                    cout<<"GAME OVER"<<endl;
+                    exit(0);
+                }
                 if(x == 0 || x==31 || y==51 || y==0)
                 {
                     cout<<"GAME OVER"<<endl;
@@ -159,7 +172,6 @@ public:
                 }
                 if(F.x == x && F.y == y)
                 {
-                    cout<<"in food"<<endl;
                     Body.insert(Body.begin(),'*');
                     Border.Board[x][y-1] = 'H';
                     Border.Board[x][y] = '*';
@@ -170,7 +182,7 @@ public:
                 else
                 {
                     Border.print();
-                    Sleep(100);
+                    Sleep(10);
                     system("CLS");
                 }
                 break;
@@ -193,6 +205,11 @@ public:
                     Border.Board[x][y] = Border.Board[x][y+1];
                     x++;
                 }
+                else if(Border.Board[x+1][y]== '*')
+                {
+                    cout<<"GAME OVER"<<endl;
+                    exit(0);
+                }
                 if(x == 0 || x==31 || y==51 || y==0)
                 {
                     cout<<"GAME OVER"<<endl;
@@ -200,7 +217,6 @@ public:
                 }
                 if(F.x == x && F.y == y)
                 {
-                    cout<<"in food"<<endl;
                     Border.Board[x+1][y] = 'H';
                     Border.Board[x][y] = '*';
                     x++;
@@ -210,7 +226,7 @@ public:
                 else
                 {
                     Border.print();
-                    Sleep(100);
+                    Sleep(10);
                     system("CLS");
                 }
                 break;
@@ -233,6 +249,11 @@ public:
                     Border.Board[x][y] = Border.Board[x][y+1];
                     x--;
                 }
+                else if(Border.Board[x-1][y]== '*')
+                {
+                    cout<<"GAME OVER"<<endl;
+                    exit(0);
+                }
                 if(x == 0 || x==31 || y==51 || y==0)
                 {
                     cout<<"GAME OVER"<<endl;
@@ -240,7 +261,6 @@ public:
                 }
                 if(F.x == x && F.y == y)
                 {
-                    cout<<"in food"<<endl;
                     Border.Board[x-1][y] = 'H';
                     Border.Board[x][y] = '*';
                     x--;
@@ -250,7 +270,7 @@ public:
                 else
                 {
                     Border.print();
-                    Sleep(100);
+                    Sleep(10);
                     system("CLS");
                 }
                 break;
@@ -261,7 +281,7 @@ public:
                 exit(0);
                 break;
             default:
-                system("pause");
+                continue;
             }
             Border.Board[x_e][y_e] = ' ';
             if(Border.Board[x_e][y_e-1] == '*')
@@ -289,7 +309,7 @@ int main()
     cout<<"ENTER 0 TO END"<<endl;
     cout<<"ENTER SPACE TO PAUSE"<<endl;
     cout<<"FOR KNOW ABOUT CONTROLLS ENTER 5"<<endl;
-    cin>>choice<<endl;
+    cin>>choice;
     if(choice==1)
     {
         F.popup(Border);
